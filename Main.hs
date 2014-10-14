@@ -52,8 +52,4 @@ eitherCSV (Left _) = []
 
 appendCSV :: Record -> IO()
 appendCSV record = do
-  inCSV <- readCSV
-  let newCSV = record : inCSV 
-  fileHandle <- openFile "setting.csv" ReadWriteMode
-  putStrLnUtf8 fileHandle  $ printCSV newCSV
-  hClose fileHandle
+  appendFile "setting.csv" ((printCSV [record]) ++ "\n")
